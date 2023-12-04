@@ -9,6 +9,10 @@ import java.util.HashMap;
 import Modules.Exceptions.InvalidPriceException;
 import Modules.Exceptions.SectionAlreadyExistsException;
 import Modules.Exceptions.SectionNotFoundException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 
 
 /**
@@ -18,18 +22,20 @@ import Modules.Exceptions.SectionNotFoundException;
 public abstract class Evenement {
     private int eventId;
     private String eventName;
-    private String eventDate;
+    private LocalDate eventDate;
+    private LocalTime eventTime;
     private Map<Integer, Double> sectionPrices = new HashMap<>();
     private String description;
 
-    public Evenement(int eventId, String eventName, String eventDate,String description) {
-        this(eventId, eventName, eventDate, new HashMap<>(),description);
+    public Evenement(int eventId, String eventName, LocalDate eventDate,LocalTime eventTime,String description) {
+        this(eventId, eventName, eventDate,eventTime, new HashMap<>(),description);
     }
 
-    public Evenement(int eventId, String eventName, String eventDate, Map<Integer, Double> sectionPrices, String description) {
+    public Evenement(int eventId, String eventName, LocalDate eventDate,LocalTime eventTime, Map<Integer, Double> sectionPrices, String description) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
+        this.eventTime = eventTime;
         this.sectionPrices = sectionPrices;
         this.description = description;
     
@@ -37,13 +43,16 @@ public abstract class Evenement {
 
     public int getEventId() {return eventId;}
     public String getEventName() {return eventName;}
-    public String getEventDate() {return eventDate;}
+    public LocalDate getEventDate() {return eventDate;}
+    public LocalTime getEventTime() {return eventTime;}
     public Map<Integer, Double> getSectionPrices() {return sectionPrices;}
     public String getDescription() {return description;}
     
+    
     public void setEventId(int eventId) {this.eventId = eventId;}
     public void setEventName(String eventName) {this.eventName = eventName;}
-    public void setEventDate(String eventDate) {this.eventDate = eventDate;}
+    public void setEventDate(LocalDate eventDate) {this.eventDate = eventDate;}
+    public void setEventTime(LocalTime eventTime) {this.eventTime = eventTime;}
     public void setDescription(String description) {this.description = description;}
     
     public void removeSection(int sectionId) {
@@ -96,5 +105,23 @@ public abstract class Evenement {
             System.out.println(e);
             return 0.0;
         }
+    }
+    
+     public double getMinPrice() {
+        return Collections.min(sectionPrices.values());
+    }
+
+    public double getMaxPrice() {
+        return Collections.max(sectionPrices.values());
+    }
+    
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return eventDate.format(formatter);
+    }
+
+    public String getFormattedTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return eventTime.format(formatter);
     }
 }

@@ -31,7 +31,7 @@
             <URL value="@/Styles/stadebuilder.css" />
          </stylesheets>
          <top>
-            <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="1920.0" style="-fx-background-color: #000080;" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="1920.0" style="-fx-background-color: #34458d;" BorderPane.alignment="CENTER">
                <children>
                   <Region prefHeight="83.0" prefWidth="30.0" />
                   <StackPane prefHeight="83.0" prefWidth="7.0">
@@ -197,9 +197,9 @@
          <center>
             <ScrollPane fx:id="StadePane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="740.0" prefWidth="1239.0" BorderPane.alignment="CENTER">
                <content>
-                  <Pane fx:id="StadeLayout" minHeight="730.0" minWidth="1262.0" prefHeight="989.0" prefWidth="1621.0" style="-fx-background-color: white;">
+                  <Pane fx:id="StadeLayout" style="-fx-background-color: white;">
                      <children>
-                        <ImageView fitHeight="253.0" fitWidth="433.0" layoutX="607.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="235.0" fitWidth="433.0" layoutX="625.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../img/stadeImg.png" />
                            </image>
@@ -213,7 +213,7 @@
             <Pane fx:id="TroublePane" pickOnBounds="false" prefHeight="0.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
-      <Button fx:id="zoomInButton" layoutX="1559.0" layoutY="102.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="button-style" stylesheets="@../Styles/stadebuilder.css">
+      <Button fx:id="zoomInButton" layoutX="1559.0" layoutY="102.0" mnemonicParsing="false" onAction="#zoomInButtonClicked" prefHeight="45.0" prefWidth="45.0" styleClass="button-style" stylesheets="@../Styles/stadebuilder.css">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -222,7 +222,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="zoomOutButton" layoutX="1503.0" layoutY="102.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="button-style" stylesheets="@../Styles/stadebuilder.css">
+      <Button fx:id="zoomOutButton" layoutX="1503.0" layoutY="102.0" mnemonicParsing="false" onAction="#zoomOutButtonClicked" prefHeight="45.0" prefWidth="45.0" styleClass="button-style" stylesheets="@../Styles/stadebuilder.css">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>

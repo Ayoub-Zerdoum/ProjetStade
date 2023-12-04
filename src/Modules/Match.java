@@ -4,6 +4,8 @@
  */
 package Modules;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Map;
 
 /**
@@ -16,8 +18,8 @@ public class Match extends  Evenement{
     private String logoTeam1;
     private String logoTeam2;
 
-    public Match(int eventId, String eventName, String eventDate, Map<Integer,Double> sectionPrices,String description, String team1, String team2, String logoTeam1, String logoTeam2) {
-        super(eventId, eventName, eventDate, sectionPrices, description);
+    public Match(int eventId, String eventName, LocalDate eventDate,LocalTime eventTime, Map<Integer,Double> sectionPrices,String description, String team1, String team2, String logoTeam1, String logoTeam2) {
+        super(eventId, eventName, eventDate,eventTime, sectionPrices, description);
         this.team1 = team1;
         this.team2 = team2;
         this.logoTeam1 = logoTeam1;
@@ -29,8 +31,25 @@ public class Match extends  Evenement{
     public String getLogoTeam1() {return logoTeam1;}
     public String getLogoTeam2() {return logoTeam2;}
     
+    
     public void setTeam1(String team1) {this.team1 = team1;}
     public void setTeam2(String team2) {this.team2 = team2;}
     public void setLogoTeam1(String logoTeam1) {this.logoTeam1 = logoTeam1;}
     public void setLogoTeam2(String logoTeam2) {this.logoTeam2 = logoTeam2;}
+    
+    @Override
+    public String toString() {
+        return "Match{" +
+                "eventId=" + getEventId() +
+                ", eventName='" + getEventName() + '\'' +
+                ", eventDate=" + getEventDate() +
+                ", eventTime=" + getEventTime() +
+                ", sectionPrices=" + getSectionPrices() +
+                ", description='" + getDescription() + '\'' +
+                ", team1='" + getTeam1() + '\'' +
+                ", team2='" + getTeam2() + '\'' +
+                ", logoTeam1='" + getLogoTeam1() + '\'' +
+                ", logoTeam2='" + getLogoTeam2() + '\'' +
+                '}';
+    }
 }

@@ -26,7 +26,7 @@
         <URL value="@/Styles/stadebuilder.css" />
     </stylesheets>
     <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="1920.0" style="-fx-background-color: #000080;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="1920.0" style="-fx-background-color: #34458d;" BorderPane.alignment="CENTER">
             <children>
                <Region prefHeight="83.0" prefWidth="30.0" />
                <StackPane prefHeight="83.0" prefWidth="7.0">
@@ -63,9 +63,9 @@
       </HBox>
    </top>
    <right>
-      <VBox prefHeight="997.0" prefWidth="297.0" style="-fx-background-color: #ADBAB7;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="997.0" prefWidth="297.0" style="-fx-background-color: #c8c9d0;" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefWidth="150.0" style="-fx-background-color: #ADBAB7;">
+            <VBox alignment="CENTER" prefWidth="150.0" style="-fx-background-color: #c8c9d0;">
                <children>
                   <HBox prefHeight="27.0" prefWidth="150.0">
                      <children>

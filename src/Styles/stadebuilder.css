@@ -3,7 +3,7 @@
  */
 
 .button-style {
-    -fx-background-color: #000080;
+    -fx-background-color: #34458d;
     -fx-border-style: none;
     -fx-background-radius: 0;
     -fx-text-fill: white;
@@ -34,7 +34,7 @@
 }
 
 .saveButton {
-    -fx-background-color: #000080;
+    -fx-background-color: #34458d;
     -fx-border-style: none;
     -fx-background-radius: 0;
     -fx-text-fill: white;
@@ -58,7 +58,7 @@
     -fx-font-family: "Canva Sans"; /* Font family for textfields */
     -fx-font-size: 14px;
     -fx-background-radius: 0;/* Font size for textfields */
-    /* Add more styling properties as needed */
+    /* Add more styling properties as needed #000080*/
 }
 
 
@@ -69,11 +69,13 @@
     -fx-font-size: 20px;
 }
 
+
 .sectionPrice-style {
     -fx-background-color: #5271ff;
     -fx-text-fill: white;
     -fx-font-family: "Canva Sans";
     -fx-font-size: 20px;
+    -fx-background-radius: 0;
 }
 
 .prices-style {
@@ -111,6 +113,13 @@
     -fx-font-weight: bold;
 }
 
+.ConcertTitle-style{
+    -fx-text-fill: #ff0000; /* Text color */
+    -fx-font-family: "Canva Sans"; /* Font family */
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
 .white-checkbox .box {
     -fx-background-color: white;
     -fx-border-color: transparent;
@@ -118,3 +127,6 @@
     -fx-background-radius: 0;
 }
 
+.Event-display {
+    -fx-background-color: #c8c9d0; /* Specify your desired background color */
+}

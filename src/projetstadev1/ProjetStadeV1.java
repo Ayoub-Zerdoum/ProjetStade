@@ -26,10 +26,10 @@ public class ProjetStadeV1 extends Application {
     public void start(Stage primaryStage) {
         
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/Vues/StadeBuilder.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/Vues/StadeBuilder.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/Vues/EventManager.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("/Vues/EventViewer.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("/Vues/StadeViewer.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/Vues/EventClient.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Vues/StadeViewer.fxml"));
     
         
             Scene scene = new Scene(root);

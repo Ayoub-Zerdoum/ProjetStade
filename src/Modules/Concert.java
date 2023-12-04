@@ -4,6 +4,8 @@
  */
 package Modules;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,8 +18,8 @@ public class Concert extends Evenement{
     private Set<String> artists;
     private String posterImagePath;
 
-    public Concert(int eventId, String eventName, String eventDate, Map<Integer, Double> sectionPrices,String description, Set<String> artists, String posterImagePath) {
-        super(eventId, eventName, eventDate, sectionPrices, description);
+    public Concert(int eventId, String eventName, LocalDate eventDate,LocalTime eventTime, Map<Integer, Double> sectionPrices,String description, Set<String> artists, String posterImagePath) {
+        super(eventId, eventName, eventDate,eventTime, sectionPrices, description);
         this.artists = new HashSet<String>(artists);
         this.posterImagePath = posterImagePath;
     }
