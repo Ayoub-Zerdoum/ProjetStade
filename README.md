@@ -21,7 +21,7 @@ The application should allow users to :
   <li>purchase items from the stadium store</li>
 </ul>
 <strong>The goal is to provide a comprehensive and engaging user experience.</strong>
-
+<br>
 the application also provides an interface for the admin to : 
 <ul>
   <li>configure the layout of its stadium</li>
@@ -50,7 +50,7 @@ the application also provides an interface for the admin to :
 
 
 <strong>check the status of the seats : available / for resale / for switching / sold</strong>
-<img src="./captures/StadeViewer2.png" alt="Stade viewer for users 1">
+<img src="./captures/EventViewer2.png" alt="Stade viewer for users 2">
 
 
 
@@ -91,7 +91,7 @@ the application also provides an interface for the admin to :
 
 
 ### DATABASE Config
-<img src="./captures/shemaDATABASE.png" alt="database shema">
+<img src="./captures/ShemaDATABASE.png" alt="database shema">
 
 
 
