@@ -25,6 +25,14 @@ the application also provides an interface for the admin to :
 
 ## Detailed Features
 
+### USERS INTERFACES
+
 <strong>Authentification</strong>
-![login form](./captures/login.png)
 <img src="./captures/login.png" alt="login form">
+
+<strong>CHECK events , concerts and matchs</strong>
+<img src="./captures/EventViewer1.png" alt="event viewer for users 1">
+
+<strong>CHECK events , concerts and matchs</strong>
+<img src="./captures/EventViewer2.png" alt="event viewer for users 2">
+
