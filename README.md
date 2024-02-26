@@ -26,4 +26,5 @@ the application also provides an interface for the admin to :
 ## Detailed Features
 
 <strong>Authentification</strong>
-<img src="./captures/login" alt="login form">
+![login form](./captures/login.png)
+<img src="./captures/login.png" alt="login form">
