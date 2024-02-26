@@ -40,13 +40,13 @@
                   </children>
                </StackPane>
                <Region prefHeight="83.0" prefWidth="12.0" />
-               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ayoub Zerdoum ">
+               <Text fx:id="UserName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ayoub Zerdoum ">
                   <font>
                      <Font size="22.0" />
                   </font>
                </Text>
                <Region prefHeight="83.0" prefWidth="124.0" />
-               <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="MenuEvents" fitHeight="55.0" fitWidth="48.0" onMouseClicked="#handleEvents" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../img/list-2-128.png" />
                   </image>

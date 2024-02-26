@@ -31,7 +31,8 @@ public class Siege extends Circle{
         "RESERVED",
         "RESALE",
         "SWITCH",
-        "AVAILABLE"
+        "AVAILABLE",
+        "YOURS"
     };
 
     public Siege(int siegeId, int numSiege, int sectionId, String status, double x, double y) {

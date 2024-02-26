@@ -45,13 +45,13 @@
                      </children>
                   </StackPane>
                   <Region prefHeight="83.0" prefWidth="12.0" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ayoub Zerdoum ">
+                  <Text fx:id="UserName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ayoub Zerdoum ">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Text>
                   <Region prefHeight="83.0" prefWidth="124.0" />
-                  <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="MenuEvents" fitHeight="55.0" fitWidth="48.0" onMouseClicked="#handleEvent" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/list-2-128.png" />
                      </image>
@@ -67,7 +67,7 @@
                   <Region layoutX="449.0" layoutY="10.0" prefHeight="83.0" prefWidth="25.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="62.0" layoutX="474.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
                   <Region layoutX="479.0" layoutY="10.0" prefHeight="83.0" prefWidth="25.0" />
-                  <ImageView fitHeight="150.0" fitWidth="56.0" layoutX="504.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="MenuTickets" fitHeight="150.0" fitWidth="56.0" layoutX="504.0" layoutY="24.0" onMouseClicked="#handleTickets" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/ticket-128.png" />
                      </image>
@@ -75,7 +75,7 @@
                   <Region layoutX="560.0" layoutY="10.0" prefHeight="83.0" prefWidth="25.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="62.0" layoutX="585.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
                   <Region layoutX="590.0" layoutY="10.0" prefHeight="83.0" prefWidth="25.0" />
-                  <ImageView fitHeight="150.0" fitWidth="56.0" layoutX="615.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="MenuShop" fitHeight="150.0" fitWidth="56.0" layoutX="615.0" layoutY="24.0" onMouseClicked="#handleShop" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/cart-59-128.png" />
                      </image>
@@ -105,7 +105,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Line>
-                        <GridPane alignment="CENTER" hgap="10.0">
+                        <GridPane fx:id="MySpaceGrid" alignment="CENTER" hgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="127.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="95.0" />
@@ -115,27 +115,48 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                            <children>
-                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="smallTitle2-style" stylesheets="@../Styles/stadebuilder.css" text="Siege" />
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="150.0" styleClass="smallTitle2-style" stylesheets="@../Styles/stadebuilder.css" text="Price" GridPane.columnIndex="1" />
-                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" layoutX="144.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <CheckBox alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <CheckBox alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Label fx:id="SiegeTitle" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="smallTitle2-style" stylesheets="@../Styles/stadebuilder.css" text="Siege" />
+                              <Label fx:id="PriceTitle" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="150.0" styleClass="smallTitle2-style" stylesheets="@../Styles/stadebuilder.css" text="Price" GridPane.columnIndex="1" />
+                              <Label fx:id="YourSiege1" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="1" />
+                              <Label fx:id="YourSiege2" alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="2" />
+                              <Label fx:id="YourPrice1" alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="YourPrice2" alignment="CENTER" layoutX="144.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="check1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="check2" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Label fx:id="YourSiege3" alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="3" />
+                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="4" />
+                              <Label fx:id="YourSiege4" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="4" />
+                              <Label fx:id="YourSiege5" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="5" />
+                              <Label fx:id="YourSiege6" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="6" />
+                              <Label fx:id="YourPrice3" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="YourSiege7" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" GridPane.rowIndex="7" />
+                              <Label fx:id="YourPrice4" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="YourPrice5" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="YourPrice6" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="YourPrice7" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <CheckBox fx:id="check7" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="46.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                              <CheckBox fx:id="check6" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="16.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                              <CheckBox fx:id="check5" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="16.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                              <CheckBox fx:id="check4" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="16.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="check3" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="16.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="11.0" styleClass="white-checkbox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
-                        <Button fx:id="createNewSiegeButton1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="7.0" prefWidth="278.0" styleClass="button-style2" stylesheets="@../Styles/stadebuilder.css" text="Resale">
+                        <Button fx:id="resaleButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="7.0" prefWidth="278.0" styleClass="button-style2" stylesheets="@../Styles/stadebuilder.css" text="Resale">
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="createNewSiegeButton11" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="278.0" styleClass="button-style2" stylesheets="@../Styles/stadebuilder.css" text="Switch">
+                        <Button fx:id="switchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="167.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="278.0" styleClass="button-style2" stylesheets="@../Styles/stadebuilder.css" text="Switch">
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="5.0" />
                            </VBox.margin>
@@ -171,16 +192,16 @@
                               <Insets left="5.0" right="5.0" />
                            </VBox.margin>
                            <children>
-                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" />
-                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" />
+                              <Label fx:id="Selected_Sec_Sig" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="S11 - 36" />
+                              <Label fx:id="Selected_Sec_Sig_price" alignment="CENTER" prefHeight="27.0" prefWidth="150.0" styleClass="label-style" text="24$" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="310.0" styleClass="subtitle-text" text="Available">
+                        <Label fx:id="SiegeState" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="310.0" styleClass="subtitle-text" text="Available">
                            <VBox.margin>
                               <Insets left="20.0" right="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button fx:id="createNewSiegeButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="19.0" prefWidth="278.0" stylesheets="@../Styles/stadebuilder.css" text="BUY NOW">
+                        <Button fx:id="BuyNowButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleBuyNowButton" prefHeight="19.0" prefWidth="278.0" stylesheets="@../Styles/stadebuilder.css" text="BUY NOW">
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="10.0" />
                            </VBox.margin>
@@ -197,7 +218,7 @@
          <center>
             <ScrollPane fx:id="StadePane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="740.0" prefWidth="1239.0" BorderPane.alignment="CENTER">
                <content>
-                  <Pane fx:id="StadeLayout" style="-fx-background-color: white;">
+                  <Pane fx:id="StadeLayout" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: white;">
                      <children>
                         <ImageView fitHeight="235.0" fitWidth="433.0" layoutX="625.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
                            <image>

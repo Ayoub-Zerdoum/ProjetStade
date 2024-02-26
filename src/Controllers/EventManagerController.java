@@ -11,6 +11,7 @@ import Modules.Match;
 import Modules.Section;
 import Modules.Siege;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -60,7 +61,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import static javafx.scene.shape.StrokeType.INSIDE;
@@ -83,6 +88,12 @@ public class EventManagerController implements Initializable {
     
     @FXML
     private TextField EventNameField;
+    
+    @FXML
+    private ImageView MenuStade;
+    
+    @FXML
+    private ImageView MenuEvents;
     
     
 
@@ -233,7 +244,7 @@ public class EventManagerController implements Initializable {
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306/stadeprojet";
     private static final String USER = "root";
-    private static final String PASSWORD = "AyoubM";
+    private static final String PASSWORD = "***";
     private static final String SELECT_ALL_SECTIONS = "SELECT * FROM stadeprojet.sections";
 
     public static void insertMatchToDatabase(Match match) {
@@ -647,7 +658,7 @@ public class EventManagerController implements Initializable {
             selectSectionPricesStatement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace(); 
         }
 
         return sectionPrices;
@@ -716,7 +727,6 @@ public class EventManagerController implements Initializable {
             
             targetPane.setScaleX(0.3);
             targetPane.setScaleY(0.3);
-            
             
             //section.getSectionShape().setScaleX(section.getScale());
             //section.getSectionShape().setScaleY(section.getScale());
@@ -1286,6 +1296,10 @@ public class EventManagerController implements Initializable {
                 selectedSections.add(section);
             }
         }
+
+        for(Section section : selectedSections){
+            applyColorAndBorder(section.getSectionShape(), SEL_SEC_COLOR, SEC_BORDER_COLOR, SEC_BORDER_WIDTH, SEC_BORDER_TYPE);
+        }        
         displaySections(0);
         updateSectionGrid(sectionDetailsGridMatch);
     }
@@ -1372,8 +1386,10 @@ public class EventManagerController implements Initializable {
 
         if (selectedEvent == null) {
             insertConcertToDatabase(concert);
+            System.out.println("starting to insert");
         } else {
             concert.setEventId(selectedEvent.getEventId());
+            System.out.println("starting to update");
             updateConcertToDatabase(concert);
             events.remove(selectedEvent);
         }
@@ -1472,12 +1488,14 @@ public class EventManagerController implements Initializable {
 
             // Loop through existing entries in the concert_section_prices table and delete the ones that don't exist in the map
             Map<Integer, Double> sectionPrices = concert.getSectionPrices();
+            System.out.println("deleting started !");
             for (Map.Entry<Integer, Double> entry : sectionPrices.entrySet()) {
                 int sectionId = entry.getKey();
 
                 deleteSectionPricesStatement.setInt(1, concert.getEventId());
                 deleteSectionPricesStatement.setInt(2, sectionId);
 
+                System.out.println("deleting section : " + sectionId + " du concert : " + concert.getEventId());
                 // Execute the delete statement for the concert_section_prices table
                 deleteSectionPricesStatement.executeUpdate();
             }
@@ -1829,6 +1847,10 @@ public class EventManagerController implements Initializable {
                 selectedSections.add(section);
             }
         }
+        for(Section section : selectedSections){
+            applyColorAndBorder(section.getSectionShape(), SEL_SEC_COLOR, SEC_BORDER_COLOR, SEC_BORDER_WIDTH, SEC_BORDER_TYPE);
+        }
+        
         displaySections(1);
         updateSectionGrid(sectionDetailsGridConcert);
     }
@@ -1876,6 +1898,7 @@ public class EventManagerController implements Initializable {
         // Retrieve the unique ID set for the edit button
         String buttonId = editButton.getId();
         String eventId = buttonId.substring("edit_".length());
+        System.out.println("editing concert 0" + eventId);
 
         // Retrieve the Concert object associated with the ID from the map
         Concert concertToEdit = (Concert) events.stream()
@@ -1883,11 +1906,13 @@ public class EventManagerController implements Initializable {
                 .findFirst()
                 .orElse(null);
 
+        System.out.println("editing concert 0");
         // Perform null check
         if (concertToEdit != null) {
             // Check if the form already exists in mainLayout
+            System.out.println("editing concert 1");
             selectedEvent = concertToEdit;
-            System.out.println("editing concert");
+            System.out.println("editing concert 2");
             if (mainLayout.getChildren().contains(ConcertForm)) {
                 // Bring the form to the front
                 mainLayout.getChildren().remove(ConcertForm);
@@ -1917,6 +1942,27 @@ public class EventManagerController implements Initializable {
 
         // Add the new artistTextField to the artistsTextFields VBox
         artistsTextFields.getChildren().add(newArtistTextField);
+    }
+    
+    
+    @FXML
+    private void handleStade(MouseEvent event) {
+        
+            try {
+                // Load the next FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/StadeBuilder.fxml"));
+                Parent root = loader.load();
+                StadeBuilderController nextController = loader.getController();
+
+                // Show the new scene
+                Stage stage = (Stage) MenuStade.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle the exception appropriately
+            }
+        
     }
     //extrat --------------------------
     public void applyColorAndBorder(Shape shape, Color fillColor, Color borderColor, double borderWidth, StrokeType strokeType) {

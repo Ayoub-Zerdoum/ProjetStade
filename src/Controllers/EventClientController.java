@@ -7,6 +7,9 @@ package Controllers;
 import Modules.Concert;
 import Modules.Evenement;
 import Modules.Match;
+import Modules.User;
+import Modules.Visitor;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,9 +27,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -42,6 +48,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import static javafx.scene.text.TextAlignment.CENTER;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -55,6 +62,8 @@ public class EventClientController implements Initializable {
     
     @FXML
     private HBox NewBox;
+    
+    private User CurrentUser;
 
     private List<Evenement> events = new ArrayList<>();
     private Map<String, HBox> matchDisplayMap = new HashMap<>();
@@ -64,7 +73,7 @@ public class EventClientController implements Initializable {
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306/stadeprojet";
     private static final String USER = "root";
-    private static final String PASSWORD = "AyoubM";
+    private static final String PASSWORD = "***";
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,7 +81,7 @@ public class EventClientController implements Initializable {
         loadEventsFromDatabase();
         
     }    
-    
+    public void setUser(User user) {this.CurrentUser = user;}
     public void loadEventsFromDatabase() {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -178,7 +187,7 @@ public class EventClientController implements Initializable {
             selectSectionPricesStatement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace(); 
         }
 
         return sectionPrices;
@@ -211,7 +220,7 @@ public class EventClientController implements Initializable {
             selectSectionPricesStatement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace(); 
         }
 
         return sectionPrices;
@@ -234,8 +243,6 @@ public class EventClientController implements Initializable {
                 Concert concert = (Concert) event;
                 eventDisplay = createDuplicateConcertDisplay(concert);
             }
-            // Create a new display for the event
-            
 
             System.out.println("Displaying an event");
             // Add the customized display to mainLayout
@@ -346,11 +353,7 @@ public class EventClientController implements Initializable {
         priceBoxLabel.setPrefWidth(170.0);
         priceBoxLabel.getStyleClass().add("prices-style");
         priceBoxLabel.setPadding(new Insets(5.0, 10.0, 5.0, 10.0));
-        
-        //priceBoxLabel.setPadding(new Insets(5.0, 10.0, 5.0, 10.0));
-        
-        //priceRangeBox.getChildren().addAll(priceRangeTitle, priceRangeLabel);
-        
+
 
         Rectangle rectangle = new Rectangle();
         rectangle.setArcHeight(5.0);
@@ -472,6 +475,75 @@ public class EventClientController implements Initializable {
                 innerVBox, rectangle, region31,dateAndDescriptionBox, buttonsBox
         );
         System.out.println("step 9");
+        
+        reserveNowButton.setOnAction(ev -> {
+                try {
+                    // Load the FXML file for the StadeViewer
+                    FXMLLoader stadeViewerLoader = new FXMLLoader(getClass().getResource("/Vues/StadeViewer.fxml"));
+                    Parent stadeViewerRoot = stadeViewerLoader.load();
+                    Scene stadeViewerScene = new Scene(stadeViewerRoot);
+
+                    // Get the controller for the StadeViewer
+                    StadeViewerController stadeViewerController = stadeViewerLoader.getController();
+
+                    // Pass information (user and evenement) to the StadeViewer
+                    //stadeViewerController.setUser(CurrentUser); // Replace 'currentUser' with your User object
+                    Evenement selectedEvenement;
+                    stadeViewerController.setUserData(CurrentUser,event); // Replace 'selectedEvenement' with your Evenement object
+
+                    // Set up the primary stage for the StadeViewer
+                    Stage primaryStage = (Stage) reserveNowButton.getScene().getWindow();
+                    primaryStage.setScene(stadeViewerScene);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+            });
+        
+        checkMerchButton.setOnAction(ev -> {
+                try {
+                    // Load the FXML file for the StadeViewer
+                    FXMLLoader stadeViewerLoader = new FXMLLoader(getClass().getResource("/Vues/ShopViewer.fxml"));
+                    Parent shopViewerRoot = stadeViewerLoader.load();
+                    Scene shopViewerScene = new Scene(shopViewerRoot);
+
+                    // Get the controller for the StadeViewer
+                    StadeViewerController shopViewerController = stadeViewerLoader.getController();
+
+                    // Pass information (user and evenement) to the StadeViewer
+                    //stadeViewerController.setUser(CurrentUser); // Replace 'currentUser' with your User object
+                    Evenement selectedEvenement;
+                    shopViewerController.setUserData(CurrentUser,event); // Replace 'selectedEvenement' with your Evenement object
+
+                    // Set up the primary stage for the StadeViewer
+                    Stage primaryStage = (Stage) reserveNowButton.getScene().getWindow();
+                    primaryStage.setScene(shopViewerScene);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+            });
+        
+        checkTicketButton.setOnAction(ev -> {
+                try {
+                    // Load the FXML file for the StadeViewer
+                    FXMLLoader stadeViewerLoader = new FXMLLoader(getClass().getResource("/Vues/TicketView.fxml"));
+                    Parent ticketViewRoot = stadeViewerLoader.load();
+                    Scene ticketViewScene = new Scene(ticketViewRoot);
+
+                    // Get the controller for the StadeViewer
+                    TicketViewController ticketViewCon = stadeViewerLoader.getController();
+
+                    // Pass information (user and evenement) to the StadeViewer
+                    ticketViewCon.setUserData(CurrentUser,event); // Replace 'currentUser' with your User object
+                    Evenement selectedEvenement;
+                    //stadeViewerController.setEvenement(event); // Replace 'selectedEvenement' with your Evenement object
+
+                    // Set up the primary stage for the StadeViewer
+                    Stage primaryStage = (Stage) reserveNowButton.getScene().getWindow();
+                    primaryStage.setScene(ticketViewScene);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+            });
 
         //deleteButton.setOnAction(this::handleDeleteConcertButtonClick);
         //editButton.setOnAction(this::handleEditConcertButtonClick);
@@ -713,11 +785,61 @@ public class EventClientController implements Initializable {
                 priceRangeBox, rectangle, region31,dateAndDescriptionBox, buttonsBox
         );
         System.out.println("step 9");
+        
+        reserveNowButton.setOnAction(ev -> {
+                try {
+                    FXMLLoader stadeViewerLoader = new FXMLLoader(getClass().getResource("/Vues/StadeViewer.fxml"));
+                    Parent stadeViewerRoot = stadeViewerLoader.load();
+                    Scene stadeViewerScene = new Scene(stadeViewerRoot);
 
-        //deleteButton.setOnAction(this::handleDeleteMatchButtonClick);
-        //editButton.setOnAction(this::handleEditMatchButtonClick);
+                    StadeViewerController stadeViewerController = stadeViewerLoader.getController();
 
-        //deleteButton.setOnAction(e -> handleDeleteButtonClick(e));
+                    stadeViewerController.setUserData(CurrentUser,event);
+
+                    Stage primaryStage = (Stage) reserveNowButton.getScene().getWindow();
+                    primaryStage.setScene(stadeViewerScene);
+                } catch (IOException e) {
+                    e.printStackTrace(); 
+                }
+            });
+        
+        checkMerchButton.setOnAction(ev -> {
+                try {
+                    FXMLLoader stadeViewerLoader = new FXMLLoader(getClass().getResource("/Vues/ShopViewer.fxml"));
+                    Parent shopViewerRoot = stadeViewerLoader.load();
+                    Scene shopViewerScene = new Scene(shopViewerRoot);
+
+                    ShopViewerController shopViewerController = stadeViewerLoader.getController();
+
+                   
+                    Evenement selectedEvenement;
+                    shopViewerController.setUserData(CurrentUser,event);
+
+                    // Set up the primary stage for the StadeViewer
+                    Stage primaryStage = (Stage) reserveNowButton.getScene().getWindow();
+                    primaryStage.setScene(shopViewerScene);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        
+        checkTicketButton.setOnAction(ev -> {
+                try {
+                    FXMLLoader stadeViewerLoader = new FXMLLoader(getClass().getResource("/Vues/TicketView.fxml"));
+                    Parent ticketViewRoot = stadeViewerLoader.load();
+                    Scene ticketViewScene = new Scene(ticketViewRoot);
+
+                    TicketViewController ticketViewCon = stadeViewerLoader.getController();
+
+                    ticketViewCon.setUserData(CurrentUser,event); 
+                    Evenement selectedEvenement;
+
+                    Stage primaryStage = (Stage) reserveNowButton.getScene().getWindow();
+                    primaryStage.setScene(ticketViewScene);
+                } catch (IOException e) {
+                    e.printStackTrace(); 
+                }
+            });
 
         return duplicatedDisplay;
     }
@@ -738,5 +860,6 @@ public class EventClientController implements Initializable {
 
         return labelBox;
     }
+    
     
 }

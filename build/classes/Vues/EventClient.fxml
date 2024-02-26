@@ -32,7 +32,7 @@
                </children>
             </StackPane>
             <Region prefHeight="83.0" prefWidth="12.0" />
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ayoub Zerdoum ">
+            <Text fx:id="UserName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ayoub Zerdoum ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -49,6 +49,22 @@
             <ImageView fitHeight="150.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/stadium-128%20(1).png" />
+               </image>
+            </ImageView>
+            <Region prefHeight="83.0" prefWidth="25.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="62.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+            <Region prefHeight="83.0" prefWidth="25.0" />
+            <ImageView fitHeight="150.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ticket-128.png" />
+               </image>
+            </ImageView>
+            <Region prefHeight="83.0" prefWidth="25.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="62.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+            <Region prefHeight="83.0" prefWidth="25.0" />
+            <ImageView fitHeight="150.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cart-59-128.png" />
                </image>
             </ImageView>
          </children>

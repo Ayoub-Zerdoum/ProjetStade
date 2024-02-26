@@ -49,6 +49,8 @@ import javafx.scene.shape.StrokeType;
 
 import java.util.Map;
 import java.util.stream.Collectors;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.ImageView;
 /**
  * FXML Controller class
  *
@@ -119,6 +121,12 @@ public class StadeBuilderController implements Initializable {
     @FXML
     private Button zoomOutButton;
     
+    @FXML
+    private ImageView MenuStade;
+    
+    @FXML
+    private ImageView MenuEvents;
+    
     
     @FXML
     private ScrollPane StadePane;
@@ -152,7 +160,7 @@ public class StadeBuilderController implements Initializable {
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306/stadeprojet";
     private static final String USER = "root";
-    private static final String PASSWORD = "AyoubM";
+    private static final String PASSWORD = "***";
 
     // JDBC variables for opening, closing, and managing connection
     private static Connection connection;
@@ -173,17 +181,9 @@ public class StadeBuilderController implements Initializable {
         
         
         loadSectionsFromDatabase();
-        /*
-        for (Section section : sections) {
-                System.out.println("Siege X: " + siege.getCenterX() + ", Siege Y: " + siege.getCenterY());
-                
-        }
-        */
+
         StadeLayout.setPrefWidth(1336);
         StadeLayout.setPrefHeight(738);
-        
-        
-        
         
     }
     
@@ -355,11 +355,6 @@ public class StadeBuilderController implements Initializable {
                 section.getSectionShape().setScaleX(section.getScale());
                 section.getSectionShape().setScaleY(section.getScale());
 
-                // Ajoute la forme de section
-
-
-
-
                 sectionGroup.getChildren().add(section.getSectionShape());
 
                 // Applique les transformations de rotation et de translation
@@ -426,14 +421,8 @@ public class StadeBuilderController implements Initializable {
                     //siege.setFill(SEL_SIEGE_COLOR);
                     applyColorAndBorder(siege, SIG_COLOR, SIG_BORDER_COLOR, SIG_BORDER_WIDTH, SIG_BORDER_TYPE);
                     siege.setOnMouseClicked(event -> selectSiege(siege));
-                    section.addSiege(siege);
-                    
-                    
-                    
-                }
-                
-                // Add the sieges to the section group
-                
+                    section.addSiege(siege);                  
+                }             
             }
         } catch (SQLException e) {
             e.printStackTrace(); //
@@ -482,8 +471,7 @@ public class StadeBuilderController implements Initializable {
         updateTransformations(sectionGroup,newSection);
         
         StadeLayout.getChildren().add(sectionGroup);
-        
-        
+
     }
     
     public void saveCurrentSection() {
@@ -499,7 +487,6 @@ public class StadeBuilderController implements Initializable {
 
             // Set the shape index
             currentSection.setShapeByIndex(Integer.parseInt(sectionShapeField.getText()));
-            //currentSection.getSectionId() * 1000 + (currentSection.getSieges().size() + 1)
             int newSectionIdPart = currentSection.getSectionId() * 1000;
             int originalId;
             for (Siege siege : currentSection.getSieges()) {
@@ -537,10 +524,10 @@ public class StadeBuilderController implements Initializable {
     public void copySection() {
         if (currentSection != null) {
             Section copiedSection = new Section(
-                sections.size()+10, // You might want to update the ID based on your needs
+                sections.size()+10, 
                 currentSection.getSectionName() + " C",
                 currentSection.getShapeIndex(),
-                currentSection.getX() + 20, // Adjust x and y as needed
+                currentSection.getX() + 20, 
                 currentSection.getY() + 20,
                 currentSection.getRotation(),
                 currentSection.getScale()
@@ -636,7 +623,7 @@ public class StadeBuilderController implements Initializable {
         siegeSectionIdField.setText(String.valueOf(currentSection.getSectionId()));
         siegeXField.setText(String.valueOf(0));
         siegeYField.setText(String.valueOf(0));
-        siegeRadiusField.setText(String.valueOf(Siege.getStaticRadius()));;
+        siegeRadiusField.setText(String.valueOf(Siege.getStaticRadius()));
         siegeScaleField.setText(String.valueOf(Siege.getScale()));
         
         int siegeId = Integer.parseInt(siegeIdField.getText());
@@ -646,21 +633,16 @@ public class StadeBuilderController implements Initializable {
 
         
         Siege newSiege = new Siege(siegeId, NumSiege, sectionId, "available", 0, 0);
-        //newSiege.setScale(scale); // Set the scale
-        //newSiege.setSiegeRadius(radius); // Set the radius
+
         currentSection.sieges.add(newSiege);
         currentSiege = newSiege;
-        //currentSiege.setFill(SEC_COLOR);
         applyColorAndBorder(currentSiege, SIG_COLOR, SIG_BORDER_COLOR, SIG_BORDER_WIDTH, SIG_BORDER_TYPE);
         newSiege.setOnMouseClicked(event -> selectSiege(newSiege));
         int index = sections.indexOf(currentSection);
             if (index >= 0 && index < sectionGroups.size()) {
                 Group sectionGroup = sectionGroups.get(index);
-                sectionGroup.getChildren().add(newSiege);
-                
+                sectionGroup.getChildren().add(newSiege);          
             }
-        //StadeLayout.getChildren().add(newSiege);
-        
     }
     
     // Save the current siege
@@ -673,7 +655,7 @@ public class StadeBuilderController implements Initializable {
             String status = "available";
             double x = Double.parseDouble(siegeXField.getText());
             double y = Double.parseDouble(siegeYField.getText());
-            double scale = Double.parseDouble(siegeScaleField.getText()); // Get the scale input
+            double scale = Double.parseDouble(siegeScaleField.getText()); 
             double radius = Double.parseDouble(siegeRadiusField.getText()); // Get the radius input
 
             currentSiege.setSiegeId(siegeId);
@@ -685,7 +667,6 @@ public class StadeBuilderController implements Initializable {
             currentSiege.setScaleAll(scale,sections); // Set the scale
             Siege.setStaticRadius(radius,sections);
             currentSiege.setRadius(radius);// Set the radius
-            // You can save the updated siege to a file or database here
         }
     }
     
@@ -698,7 +679,6 @@ public class StadeBuilderController implements Initializable {
                 sectionGroup.getChildren().remove(currentSiege);
                 
             }
-            //StadeLayout.getChildren().remove(currentSiege);
             currentSection.sieges.remove(currentSiege);
         }
     }
@@ -724,11 +704,10 @@ public class StadeBuilderController implements Initializable {
             currentSection.getSieges().size() + 1,
             copiedSection.getSectionId(),
             originalSiege.getStatus(),
-            x, // Adjust the X position as needed
-            y  // Adjust the Y position as needed
+            x,
+            y  
         );
 
-        //copiedSiege.setFill(Color.LIGHTBLUE);
         applyColorAndBorder(copiedSiege, SEL_SIG_COLOR, SIG_BORDER_COLOR, SIG_BORDER_WIDTH, SIG_BORDER_TYPE);
         selectSiege(copiedSiege);
 
@@ -752,8 +731,8 @@ public class StadeBuilderController implements Initializable {
             copiedSection.getSieges().size() + 1,
             copiedSection.getSectionId(),
             originalSiege.getStatus(),
-            x, // Adjust the X position as needed
-            y  // Adjust the Y position as needed
+            x,
+            y 
         );
 
         //copiedSiege.setFill(Color.LIGHTBLUE);
@@ -780,16 +759,13 @@ public class StadeBuilderController implements Initializable {
         }
         
         if (currentSiege != null) {
-            //currentSiege.setFill(Color.GREEN);
-             applyColorAndBorder(currentSiege, SIG_COLOR, SIG_BORDER_COLOR, SIG_BORDER_WIDTH, SIG_BORDER_TYPE);
+            applyColorAndBorder(currentSiege, SIG_COLOR, SIG_BORDER_COLOR, SIG_BORDER_WIDTH, SIG_BORDER_TYPE);
         }
         currentSiege = siege;
-        //currentSiege.setFill(Color.LIGHTBLUE);
         applyColorAndBorder(currentSiege, SEL_SIG_COLOR, SIG_BORDER_COLOR, SIG_BORDER_WIDTH, SIG_BORDER_TYPE);
         siegeIdField.setText(Integer.toString(currentSiege.getSiegeId()));
         siegeNumField.setText(Integer.toString(currentSiege.getNumSiege()));
         siegeSectionIdField.setText(Integer.toString(currentSiege.getSectionId()));
-        //siegeStatusField.setText(currentSiege.getStatus());
         siegeXField.setText(Double.toString(currentSiege.getCenterX()));
         siegeYField.setText(Double.toString(currentSiege.getCenterY()));
 
@@ -798,8 +774,8 @@ public class StadeBuilderController implements Initializable {
             int sectionId = currentSiege.getSectionId();
             for (Section section : sections) {
                 if (section.getSectionId() == sectionId) {
-                    selectSection(section, false); // Pass false to avoid triggering section selection again
-                    break; // Break the loop once you find the corresponding section
+                    selectSection(section, false); 
+                    break; 
                 }
             }
         }
@@ -809,11 +785,9 @@ public class StadeBuilderController implements Initializable {
     
     private void selectSection(Section section, boolean triggerSiegeSelection) {
         if (currentSection != null) {
-            //currentSection.getSectionShape().setFill(Color.BLACK);
             applyColorAndBorder(currentSection.getSectionShape(), SEC_COLOR, SEC_BORDER_COLOR, SEC_BORDER_WIDTH, SEC_BORDER_TYPE);
         }
         currentSection = section;
-        //currentSection.getSectionShape().setFill(Color.PURPLE);
         applyColorAndBorder(currentSection.getSectionShape(), SEL_SEC_COLOR, SEC_BORDER_COLOR, SEC_BORDER_WIDTH, SEC_BORDER_TYPE);
 
 
@@ -822,13 +796,12 @@ public class StadeBuilderController implements Initializable {
         sectionXField.setText(Double.toString(currentSection.getX()));
         sectionYField.setText(Double.toString(currentSection.getY()));
         sectionRotationField.setText(Double.toString(currentSection.getRotation()));
-        sectionShapeField.setText(Integer.toString(currentSection.getShapeIndex())); // Update the shape field
-        sectionScaleField.setText(Double.toString(currentSection.getScale())); // Update the scale field
+        sectionShapeField.setText(Integer.toString(currentSection.getShapeIndex())); 
+        sectionScaleField.setText(Double.toString(currentSection.getScale())); 
         if (currentSection.hasSieges() && triggerSiegeSelection) {
             Siege firstSiege = currentSection.getSiegeByNumber(0);
-            selectSiege(firstSiege, false); // Pass false to avoid triggering siege selection again
+            selectSiege(firstSiege, false); 
         }
-        //Sectionform.setVisible(true);
         System.out.println("Section " + currentSection.getSectionName() + " selected");
     }
     
@@ -838,6 +811,27 @@ public class StadeBuilderController implements Initializable {
     
     private void selectSection(Section section) {
         selectSection(section, true);
+    }
+    
+    
+    @FXML
+    private void handleEvents(MouseEvent event) {
+        
+            try {
+                // Load the next FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/EventManager.fxml"));
+                Parent root = loader.load();
+                EventManagerController nextController = loader.getController();
+
+                // Show the new scene
+                Stage stage = (Stage) MenuEvents.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle the exception appropriately
+            }
+        
     }
 
     //extrat --------------------------
@@ -850,7 +844,7 @@ public class StadeBuilderController implements Initializable {
     
     private double zoomLevel = 1.0;
     public void zoomInButtonClicked() {
-        zoomLevel *= 1.1; // You can adjust the factor as needed
+        zoomLevel *= 1.1; 
         applyZoom();
         System.out.println("zoom in");
         
@@ -859,7 +853,7 @@ public class StadeBuilderController implements Initializable {
     }
 
     public void zoomOutButtonClicked() {
-        zoomLevel /= 1.1; // You can adjust the factor as needed
+        zoomLevel /= 1.1; 
 
         // Ensure the zoom level doesn't go below 1.0
         if (zoomLevel < 1.0) {
@@ -881,8 +875,4 @@ public class StadeBuilderController implements Initializable {
         StadeLayout.setTranslateX(StadeLayout.getWidth()*(zoomLevel - 1.0)/2);
         StadeLayout.setTranslateY(StadeLayout.getHeight()*(zoomLevel - 1.0)/2);
     }
-    
-    //private double originalLayoutWidth = StadeLayout.getWidth();
-    //private double originalLayoutHeight = StadeLayout.getHeight();
-
 }

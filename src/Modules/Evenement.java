@@ -55,6 +55,14 @@ public abstract class Evenement {
     public void setEventTime(LocalTime eventTime) {this.eventTime = eventTime;}
     public void setDescription(String description) {this.description = description;}
     
+    public boolean isConcert() {
+        return this instanceof Concert;
+    }
+    
+    public boolean isMatch() {
+        return this instanceof Match;
+    }
+    
     public void removeSection(int sectionId) {
         sectionPrices.remove(sectionId);
     }
