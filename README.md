@@ -92,6 +92,8 @@ the application also provides an interface for the admin to :
 
 ### DATABASE Config
 <img src="./captures/ShemaDATABASE.png" alt="database shema">
+<img src="./captures/Shema.png" alt="shema">
+
 
 
 
