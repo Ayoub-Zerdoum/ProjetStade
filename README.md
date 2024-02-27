@@ -96,13 +96,14 @@ the application also provides an interface for the admin to :
 
 
 
-
+<br>
+<br>
 
 ### Incomplete Features
 <ul>
   <li>ADMIN authentication interface not implemented yet. To switch between user mode and admin mode, you need to change the FXML file in the FXMLLoader (line 153)
-              for the user --> /Vues/EventClient.fxml
-              for the admin --> /Vues/EventManager.fxml
+              <br>for the user --> /Vues/EventClient.fxml
+              <br>for the admin --> /Vues/EventManager.fxml
   </li>
   <li>The logic of switching, reselling of seats is still not implemented! To simulate them, you can add it directly to the database in the tables switch/resale, respectively.</li>
   <li>the shop interface isnt implemented yet !!!</li>
